@@ -5,8 +5,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get update && apt-get install -y \
 	gcc-11 \
-    g++-11 \
-	gfortran-11 \
+	g++-11 \
 	build-essential \
 	cmake \
 	curl \
@@ -26,7 +25,6 @@ RUN apt-get update && apt-get install -y \
 	zlib1g-dev \
 	&& update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 \
                                --slave /usr/bin/g++ g++ /usr/bin/g++-11 \
-                               --slave /usr/bin/gfortran gfortran /usr/bin/gfortran-11 \
 	&& dpkg-reconfigure --frontend noninteractive tzdata \
 	&& apt-get clean && apt-get autoclean
 
