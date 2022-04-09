@@ -21,11 +21,17 @@ RUN apt-get update && apt-get install -y \
 	unzip \
 	zip \
 	zlib1g-dev \
-	gcc-11 \
-	g++-11 \
-	&& sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11 \
 	&& dpkg-reconfigure --frontend noninteractive tzdata \
 	&& apt-get clean && apt-get autoclean && gcc --version
+
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test -y \
+	&& apt-get update \
+	&& apt-get install gcc-11 g++-11 \
+	&& update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11
 
 WORKDIR /opt
 RUN git clone https://github.com/microsoft/vcpkg
