@@ -76,5 +76,5 @@ jobs:
         uses: actions/upload-artifact@v3.0.0
         with:
           name: otclient-${{ matrix.name }}-${{ matrix.buildtype }}-${{ github.sha }}
-          path: ${{ github.workspace }}/build/bin/otclient
+          path: ${{ github.workspace }}/otclient
 

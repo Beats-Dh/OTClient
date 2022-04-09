@@ -54,14 +54,9 @@ jobs:
         run: find $RUNNER_WORKSPACE
         shell: bash
 
-      - name: Upload artifact binary (exe)
+      - name: Upload artifact binary
         uses: actions/upload-artifact@v3.0.0
         with:
           name: otclient-${{ matrix.name }}-${{ matrix.buildtype }}-${{ github.sha }}
-          path: ${{ runner.workspace }}/build/otclient.exe
-
-      - name: Upload artifact binary (dlls)
-        uses: actions/upload-artifact@v3.0.0
-        with:
-          name: otclient-${{ matrix.name }}-${{ matrix.buildtype }}-${{ github.sha }}
-          path: ${{ runner.workspace }}/build/*.dll
+          path: ${{ github.workspace }}/otclient.exe
+                ${{ github.workspace }}/*.dll

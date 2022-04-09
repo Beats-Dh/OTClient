@@ -36,7 +36,14 @@ jobs:
       - name: Install Linux Dependencies
         if: ${{ matrix.language == 'cpp' }}
         run: >
-          sudo apt-get update && sudo apt-get install ccache libglew-dev libx11-dev liblua5.1-dev
+          sudo apt-get update && sudo apt-get install ccache libglew-dev libx11-dev libluajit-5.1-dev
+
+      - name: Switch to gcc-11
+        if: ${{ matrix.language == 'cpp' }}
+        run: |
+          sudo apt install gcc-11 g++-11
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11
+          sudo update-alternatives --set gcc /usr/bin/gcc-11
   
       - name: CCache
         id: ccache
