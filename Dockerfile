@@ -58,7 +58,7 @@ RUN apt-get update; \
 	libopengl0 \
 	&& apt-get clean && apt-get autoclean
 
-COPY --from=builder /otclient/build/bin/otclient /otclient/bin/otclient
+COPY --from=builder /otclient/otclient /otclient/otclient
 COPY ./data/ /otclient/data/.
 COPY ./mods/ /otclient/mods/.
 COPY ./modules/ /otclient/modules/.
