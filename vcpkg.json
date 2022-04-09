@@ -13,6 +13,7 @@
         "physfs",
         "protobuf",
         "zlib",
+        "liblzma",
         {
             "name": "lua"
         }
