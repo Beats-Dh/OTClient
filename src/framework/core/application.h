@@ -72,10 +72,6 @@ protected:
         m_terminated{ false };
 };
 
-#ifdef FW_GRAPHICS
 #include "graphicalapplication.h"
-#else
-#include "consoleapplication.h"
-#endif
 
 #endif
