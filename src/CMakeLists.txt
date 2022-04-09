@@ -15,6 +15,7 @@ option(TOGGLE_PRE_COMPILED_HEADER "Use precompiled header (speed up compile)" OF
 # *****************************************************************************
 # Cmake Features
 # *****************************************************************************
+set(GNUCXX_MINIMUM_VERSION "11")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -66,6 +67,15 @@ if(TOGGLE_PRE_COMPILED_HEADER)
 else()
 	message(STATUS "Use precompiled header: OFF")
 endif(TOGGLE_PRE_COMPILED_HEADER)
+
+# Set for supress deprecated declarations (for GCC/GNU)
+# If not is GCC version 11, return message of error
+if (CMAKE_COMPILER_IS_GNUCXX)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
+	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS GNUCXX_MINIMUM_VERSION)
+		message(FATAL_ERROR "GCC version must be at least ${GNUCXX_MINIMUM_VERSION}!")
+	endif()
+endif()
 
 set(VERSION "1.0.0")
 
