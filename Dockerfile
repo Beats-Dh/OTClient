@@ -3,7 +3,9 @@ FROM ubuntu:20.04 AS builder
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
-RUN apt-get update && apt-get install -y \
+## Add the PPA for gcc development builds
+## Install gcc-11 (and g++, gfortran) plus Rcpp and r-base-dev
+RUN add-apt-repository ppa:ubuntu-toolchain-r/volatile && apt-get update && apt-get install -y \
 	gcc-11 \
 	g++-11 \
 	build-essential \
