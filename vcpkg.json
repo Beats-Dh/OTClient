@@ -4,7 +4,6 @@
     "dependencies": [
         "asio",
         "opengl",
-        "glew",
         "libogg",
         "libvorbis",
         "nlohmann-json",
@@ -15,8 +14,17 @@
         "zlib",
         "liblzma",
         {
-          "name": "luajit",
-          "platform": "windows"
+            "name": "luajit",
+            "platform": "windows"
+        },
+        {
+            "name": "glew",
+            "platform": "windows"
+        },
+        {
+            "name": "sdl2",
+            "features": [ "x11" ],
+            "platform": "linux"
         }
     ]
 }

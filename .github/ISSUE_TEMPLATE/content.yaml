@@ -1,0 +1,69 @@
+name: Report a missing content
+description: Any thing that is missing
+title: "[Content]: "
+labels: ["Status: Pending Test", "Type: Missing Content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this issue!
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How critical is this?
+      options:
+        - Low
+        - Medium
+        - High
+        - Critical
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: area
+    attributes:
+      label: Area
+      description: Where is the problem?
+      options:
+        - Data
+        - Docker
+        - Source
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem/bug!
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backtick.
+      render: shell
+
+  - type: textarea
+    id: attach
+    attributes:
+      label: Attach any relevant file
+      description: Attach screenshots, full logs, etc ... that helps verifying the bug
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: What OS are you seeing the problem on?
+      multiple: true
+      options:
+        - Linux
+        - Windows
+        - MacOS
+    validations:
+      required: true
