@@ -35,8 +35,6 @@ RUN /opt/vcpkg/vcpkg --feature-flags=binarycaching,manifests,versions install
 
 COPY ./ /otclient/
 
-RUN apt-get install -y libluajit-5.1-dev
-
 WORKDIR /otclient/build/
 RUN cmake -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake ..
 RUN make -j$(nproc)
@@ -56,4 +54,4 @@ COPY ./mods/ /otclient/mods/.
 COPY ./modules/ /otclient/modules/.
 COPY ./init.lua /otclient/.
 WORKDIR /otclient
-CMD [""]
+CMD ["./otclient"]

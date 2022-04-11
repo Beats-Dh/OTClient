@@ -1,6 +1,9 @@
 ---
-source:
+"Area: Source":
   - any: ['src/**/*']
 
-data:
+"Area: Data":
   - any: ['data/**/*']
+
+"Area: Docker":
+  - any: ['docker/**/*']
