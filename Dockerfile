@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS builder
+FROM ubuntu:20.04 AS builder
 
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
@@ -24,6 +24,14 @@ RUN apt-get update && apt-get install -y \
 	tzdata \
 	&& dpkg-reconfigure --frontend noninteractive tzdata \
 	&& apt-get clean && apt-get autoclean
+
+RUN apt-get update && \
+    apt-get install -y software-properties-common
+
+run add-apt-repository -y ppa:ubuntu-toolchain-r/testv \
+	&& apt-get install -y gcc-11 g++-11 \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11 \
+    && update-alternatives --set gcc /usr/bin/gcc-11
 
 WORKDIR /opt
 RUN git clone https://github.com/microsoft/vcpkg

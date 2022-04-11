@@ -1,3 +1,4 @@
+---
 name: Report a missing content
 description: Any thing that is missing
 title: "[Content]: "
@@ -67,4 +68,3 @@ body:
         - MacOS
     validations:
       required: true
-
