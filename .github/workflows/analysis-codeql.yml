@@ -36,7 +36,7 @@ jobs:
       - name: Install Linux Dependencies
         if: ${{ matrix.language == 'cpp' }}
         run: >
-          sudo apt-get update && sudo apt-get install ccache libglew-dev libluajit-5.1-dev
+          sudo apt-get update && sudo apt-get install ccache libglew-dev libluajit-5.1-dev libx11-dev
 
       - name: Switch to gcc-11
         if: ${{ matrix.language == 'cpp' }}

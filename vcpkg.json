@@ -20,11 +20,6 @@
         {
           "name": "glew",
           "platform": "windows"
-        },
-        {
-          "name": "sdl2",
-          "features": [ "x11" ],
-          "platform": "linux"
         }
     ]
 }
