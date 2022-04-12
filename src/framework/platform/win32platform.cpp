@@ -146,7 +146,15 @@ void Platform::openUrl(std::string url)
 {
     if (url.find("http://") == std::string::npos && url.find("https://") == std::string::npos)
         url.insert(0, "http://");
-    ShellExecuteW(nullptr, L"open", stdext::utf8_to_utf16(url).c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+
+    #if defined(__APPLE__)
+        system(stdext::format("open %s", url).c_str());
+    #else
+        int systemRet = system(stdext::format("xdg-open %s", url).c_str());
+        if(!systemRet) {
+            return
+        }
+    #endif
 }
 
 std::string Platform::getCPUName()
