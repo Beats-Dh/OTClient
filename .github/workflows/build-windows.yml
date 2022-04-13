@@ -4,6 +4,9 @@ name: Build - Windows
 on:
   workflow_dispatch:
   pull_request:
+  push:
+    branches:
+      - main
 
 env:
   VCPKG_BUILD_TYPE: release
@@ -47,5 +50,4 @@ jobs:
         with:
           name: otclient-${{ runner.os }}-${{ matrix.buildtype }}-${{ github.sha }}
           path: |
-            ${{ github.workspace }}/otclient.exe
-            ${{ github.workspace }}/*.dll
+            ${{ github.workspace }}/build/${{ matrix.buildtype }}/bin/
