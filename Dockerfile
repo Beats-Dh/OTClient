@@ -8,7 +8,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends cmake git \
 		libglew-dev libx11-dev libncurses5-dev libopenal-dev \
 		libssl-dev libvorbis-dev mercurial zlib1g-dev tzdata \
 		&& dpkg-reconfigure --frontend noninteractive tzdata \
-		pkg-config ninja-build \
 		&& apt-get clean \
 		&& rm -rf /var/lib/apt/lists/*
 
