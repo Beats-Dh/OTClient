@@ -3,13 +3,12 @@ FROM ubuntu:22.04 AS builder
 RUN export DEBIAN_FRONTEND=noninteractive \
 	&& ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 
-RUN apt-get update && apt-get install -y --no-install-recommends cmake git \
-		libluajit-5.1-dev unzip	build-essential curl zip tar \
-		libglew-dev libx11-dev libncurses5-dev libopenal-dev \
-		libssl-dev libvorbis-dev mercurial zlib1g-dev tzdata \
-		&& dpkg-reconfigure --frontend noninteractive tzdata \
-		&& apt-get clean \
-		&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y build-essential cmake \
+	curl git libglew-dev libx11-dev liblua5.1-0-dev libluajit-5.1-dev \
+	libncurses5-dev libopenal-dev libssl-dev libvorbis-dev mercurial \
+	tar unzip zip zlib1g-dev tzdata \
+	&& dpkg-reconfigure --frontend noninteractive tzdata \
+	&& apt-get clean && apt-get autoclean
 
 WORKDIR /opt
 RUN git clone https://github.com/microsoft/vcpkg
