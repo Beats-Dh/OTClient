@@ -19,8 +19,8 @@ COPY vcpkg.json /opt/vcpkg/
 RUN /opt/vcpkg/vcpkg --feature-flags=binarycaching,manifests,versions install
 
 COPY ./ /otclient/
+WORKDIR /otclient
 
-WORKDIR /otclient/build/
 RUN export VCPKG_ROOT=/opt/vcpkg/ && cmake --preset linux-release && cmake --build --preset linux-release
 
 FROM ubuntu:22.04
