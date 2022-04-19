@@ -5,5 +5,3 @@
 "Area: Data":
   - any: ['data/**/*']
 
-"Area: Docker":
-  - any: ['docker/**/*']

@@ -24,7 +24,7 @@ WORKDIR /otclient/build
 RUN cmake -DCMAKE_TOOLCHAIN_FILE=/opt/vcpkg/scripts/buildsystems/vcpkg.cmake ..
 RUN make -j$(nproc)
 
-FROM ubuntu:22.04
+FROM ubuntu:20.04
 
  RUN apt-get update; \
  	apt-get install -y \
