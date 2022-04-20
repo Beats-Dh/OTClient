@@ -7,20 +7,20 @@
   },
   "configurePresets": [
     {
-      "name": "windows-release",
-      "displayName": "Windows - Release",
+      "name": "windows-release-x86",
+      "displayName": "Windows - Release - x86",
       "description": "Sets Ninja generator, compilers, build and install directory and set build type as release",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-           "type": "FILEPATH"
+          "type": "FILEPATH"
         },
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       },
       "architecture": {
-        "value": "x64",
+        "value": "x86",
         "strategy": "external"
       },
       "vendor": {
@@ -43,7 +43,7 @@
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": {
           "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-           "type": "FILEPATH"
+          "type": "FILEPATH"
         },
         "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       },
@@ -54,14 +54,27 @@
       }
     },
     {
-      "name": "windows-debug",
-      "inherits": "windows-release",
-      "displayName": "Windows - Debug",
+      "name": "windows-debug-x64",
+      "inherits": "windows-release-x86",
+      "displayName": "Windows - Debug - x64",
       "description": "Build Debug Mode",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "DEBUG_LOG": "ON",
         "ASAN_ENABLED": "ON"
+      },
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      }
+    },
+    {
+      "name": "windows-release-x64",
+      "inherits": "windows-release-x86",
+      "displayName": "Windows - Release - x64",
+      "description": "Sets Ninja generator, compilers, build and install directory and set build type as release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       },
       "architecture": {
         "value": "x64",
@@ -90,12 +103,16 @@
       "configurePreset": "linux-debug"
     },
     {
-      "name": "windows-release",
-      "configurePreset": "windows-release"
+      "name": "windows-release-x86",
+      "configurePreset": "windows-release-x86"
     },
     {
-      "name": "windows-debug",
-      "configurePreset": "windows-debug"
+      "name": "windows-release-x64",
+      "configurePreset": "windows-release-x64"
+    },
+    {
+      "name": "windows-debug-x64",
+      "configurePreset": "windows-debug-x64"
     }
   ]
 }
