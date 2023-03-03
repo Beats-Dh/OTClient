@@ -47,6 +47,10 @@ jobs:
           Write-Host "vcpkg commit ID: $vcpkgCommitId"
           echo "vcpkgGitCommitId::$vcpkgCommitId" $GITHUB_OUTPUT
 
+      - name: beats
+        run: |
+          echo "${{ steps.vcpkg-step.outputs.vcpkgGitCommitId }}"
+
       - name: Get vcpkg commit id from vcpkg.json
         uses: lukka/run-vcpkg@main
         with:
