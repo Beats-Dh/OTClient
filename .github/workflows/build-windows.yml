@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-2022]
-        buildtype: [windows-release, windows-release-asan, windows-debug]
+        buildtype: [windows-release]
         include:
           - os: windows-2022
             triplet: x64-windows
@@ -30,53 +30,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@main
 
-      - name: CCache
-        uses: hendrikmuhs/ccache-action@main
-        with:
-          max-size: "1G"
-          variant: "sccache"
-          key: ccache-${{ matrix.os }}-${{ matrix.buildtype }}
-          restore-keys: |
-            ccache-${{ matrix.os }}
-
       - name: Restore artifacts and install vcpkg
         id: vcpkg-step
         run: |
           $json=Get-Content vcpkg.json -Raw | ConvertFrom-Json
           $vcpkgCommitId=$json.'builtin-baseline'
           Write-Host "vcpkg commit ID: $vcpkgCommitId"
-          echo "vcpkgGitCommitId::$vcpkgCommitId" $GITHUB_OUTPUT
+          echo "vcpkgGitCommitId=$vcpkgCommitId" $GITHUB_OUTPUT
 
       - name: beats
         run: |
           echo "${{ steps.vcpkg-step.outputs.vcpkgGitCommitId }}"
-
-      - name: Get vcpkg commit id from vcpkg.json
-        uses: lukka/run-vcpkg@main
-        with:
-          vcpkgGitURL: "https://github.com/microsoft/vcpkg.git"
-          vcpkgGitCommitId: ${{ steps.vcpkg-step.outputs.vcpkgGitCommitId }}
-
-      - name: Get latest CMake and ninja
-        uses: lukka/get-cmake@main
-
-      - name: Run CMake
-        uses: lukka/run-cmake@main
-        with:
-          configurePreset: ${{ matrix.buildtype }}
-          buildPreset: ${{ matrix.buildtype }}
-
-      - name: Create and Upload Artifact (exe)
-        uses: actions/upload-artifact@main
-        with:
-          name: otclient-${{ matrix.buildtype }}-${{ github.sha }}
-          path: |
-            ${{ github.workspace }}/otclient.exe
-            
-      - name: Create and Upload Artifact (dlls)
-        if: ${{ matrix.buildtype != 'windows-release' }}
-        uses: actions/upload-artifact@main
-        with:
-          name: otclient-${{ matrix.buildtype }}-${{ github.sha }}
-          path: |
-            ${{ github.workspace }}/*.dll
