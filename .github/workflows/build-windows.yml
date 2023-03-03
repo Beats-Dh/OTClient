@@ -27,8 +27,6 @@ jobs:
               sccache
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@main
 
       - name: Restore artifacts and install vcpkg
         id: xyz
@@ -44,7 +42,7 @@ jobs:
 
       - name: Set Sum
         id: abc
-        run: echo "SUM=20" >> $GITHUB_OUTPUT 
+        run: echo "SUM=20" >> $GITHUB_OUTPUT
 
       - name: Get Sum
 	      run: echo "${{ steps.abc.outputs.SUM }}"
