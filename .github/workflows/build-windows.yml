@@ -30,21 +30,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@main
 
-      - name: Restore artifacts and install vcpkg
+        - name: Set color
         id: abc
-        run: |
-          $json=Get-Content vcpkg.json -Raw | ConvertFrom-Json
-          $vcpkgCommitId=$json.'builtin-baseline'
-          Write-Host "vcpkg commit ID: $vcpkgCommitId"
-          echo "vcpkgGitCommitId::$vcpkgCommitId" >> $GITHUB_OUTPUT
+        run: echo "SELECTED_COLOR=green" >> $GITHUB_OUTPUT
 
-      - name: beats
-        run: |
-          echo "${{ steps.abc.outputs.vcpkgGitCommitId }}"
-
-      - name: Set IP Address
-        id: xyz
-        run: echo "ip-address::$(curl -s ifconfig.me)" >> $GITHUB_OUTPUT
-
-      - name: Get IP Address
-        run: echo "${{ steps.xyz.outputs.ip-address }}"
+      - name: Get color
+        run: echo "The selected color is ${{ steps.abc.outputs.SELECTED_COLOR }}"
