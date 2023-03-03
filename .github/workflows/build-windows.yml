@@ -30,7 +30,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@main
 
-        - name: Set color
+      - name: Set color
         id: abc
         run: echo "SELECTED_COLOR=green" >> $GITHUB_OUTPUT
 
