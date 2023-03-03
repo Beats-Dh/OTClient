@@ -27,9 +27,6 @@ jobs:
               sccache
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@main
-
       - name: Set color
         id: random-color-generator
         run: echo "SELECTED_COLOR=green" >> $GITHUB_OUTPUT
