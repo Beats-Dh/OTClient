@@ -27,6 +27,8 @@ jobs:
               sccache
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
 
       - name: Restore artifacts and install vcpkg
         id: abc
