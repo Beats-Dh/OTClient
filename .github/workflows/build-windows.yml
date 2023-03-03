@@ -40,9 +40,9 @@ jobs:
         run: |
           echo "${{ steps.xyz.outputs.vcpkgGitCommitId }}"
 
-      - name: Set Sum
-        id: abc
-        run: echo "SUM=20" >> $GITHUB_OUTPUT
+      - name: Set IP Address
+        id: xyz
+        run: echo "ip-address::$(curl -s ifconfig.me)" >> $GITHUB_OUTPUT
 
-      - name: Get Sum
-	      run: echo "${{ steps.abc.outputs.SUM }}"
+      - name: Get IP Address
+        run: echo "${{ steps.xyz.outputs.ip-address }}"
